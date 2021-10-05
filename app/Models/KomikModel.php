@@ -7,21 +7,14 @@ use CodeIgniter\Model;
 class KomikModel extends Model
 {
     protected $table = 'komik';
-    // protected $primaryKey = 'id';
+    protected $useTimestamps = true;
 
-    // protected $useAutoIncrement = true;
+    public function getKomik($slug = false)
+    {
+        if ($slug == false) {
+            return $this->findAll();
+        }
 
-    // protected $returnType     = 'array';
-    // protected $useSoftDeletes = true;
-
-    // protected $allowedFields = ['name', 'email'];
-
-     protected $useTimestamps = true;
-    // protected $createdField  = 'created_at';
-    // protected $updatedField  = 'updated_at';
-    // protected $deletedField  = 'deleted_at';
-
-    // protected $validationRules    = [];
-    // protected $validationMessages = [];
-    // protected $skipValidation     = false;
+        return $this->where(['slug' => $slug])->first();
+    }
 }
